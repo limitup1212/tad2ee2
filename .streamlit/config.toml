@@ -1,0 +1,14 @@
+[server]
+# This computer only. Use run_phone.bat to also allow a phone on the same Wi-Fi.
+address = "localhost"
+port = 8501
+maxUploadSize = 50
+headless = true
+
+[browser]
+# No usage statistics are sent anywhere.
+gatherUsageStats = false
+
+[theme]
+base = "light"
+primaryColor = "#0f766e"

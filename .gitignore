@@ -1,0 +1,11 @@
+# Private data: saved batches, phone photos, test images. Never commit.
+data/
+diagnose.txt
+
+# Built packages and local environments
+dist/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.claude/

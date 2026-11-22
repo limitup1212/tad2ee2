@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل البدء — تدقيق الكشوف</title>
+<style>
+  :root { --bg:#f7f6f2; --card:#ffffff; --ink:#1f2937; --muted:#6b7280; --line:#e5e7eb;
+          --accent:#0f766e; --warn-bg:#fff7ed; --warn-line:#fdba74; --code:#f3f4f6; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#111827; --card:#1f2937; --ink:#f3f4f6; --muted:#9ca3af; --line:#374151;
+            --accent:#5eead4; --warn-bg:#3b2a12; --warn-line:#b45309; --code:#111827; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); line-height:1.75;
+         font-family:"Segoe UI", Tahoma, "Noto Naskh Arabic", Arial, sans-serif; font-size:17px; }
+  main { max-width: 820px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 1.9rem; margin: 8px 0 4px; }
+  h2 { font-size: 1.3rem; margin: 0 0 8px; color: var(--accent); }
+  h3 { font-size: 1.05rem; margin: 18px 0 4px; }
+  p { margin: 8px 0; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:12px;
+            padding:18px 20px; margin:16px 0; }
+  ol, ul { margin: 8px 0; padding-inline-start: 24px; }
+  li { margin: 6px 0; }
+  code, kbd { background:var(--code); border:1px solid var(--line); border-radius:6px;
+              padding:1px 6px; font-family: Consolas, "Courier New", monospace; font-size:0.92em;
+              direction:ltr; unicode-bidi:isolate; display:inline-block; }
+  .lead { color: var(--muted); margin-top: 0; }
+  .note { background:var(--warn-bg); border:1px solid var(--warn-line); border-radius:10px;
+          padding:10px 14px; margin:12px 0; }
+  .lang { display:flex; gap:10px; margin: 8px 0 0; }
+  .lang a { color:var(--accent); text-decoration:none; border:1px solid var(--line);
+            background:var(--card); border-radius:999px; padding:4px 14px; font-size:0.95rem; }
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:0.97rem; }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:start; vertical-align:top; }
+  th { background:var(--code); }
+  .num { direction:ltr; unicode-bidi:isolate; }
+  .en { direction:ltr; text-align:left; font-family:"Segoe UI", Arial, sans-serif; }
+  hr { border:none; border-top:2px dashed var(--line); margin:40px 0; }
+</style>
+</head>
+<body>
+<main>
+
+<!-- ============================ العربية ============================ -->
+<div id="ar">
+  <div class="lang"><a href="#en">English ↓</a></div>
+  <h1>دليل البدء — تدقيق الكشوف</h1>
+  <p class="lead">تجهيز التطبيق على حاسوب جديد، تنزيل النموذج، والتصوير من الهاتف مباشرة.</p>
+
+  <section>
+    <h2>ما الذي تحتاجه</h2>
+    <ul>
+      <li>حاسوب Windows 10 أو 11 (64 بت).</li>
+      <li>ذاكرة 16 غيغابايت مستحسنة (8 غيغابايت كحد أدنى)، ومساحة فارغة 6 غيغابايت تقريباً.</li>
+      <li>إنترنت <strong>للتجهيز فقط</strong> (تنزيل نحو 3.5 غيغابايت). بعد ذلك يعمل التطبيق بدون إنترنت.</li>
+      <li>كرت شاشة غير مطلوب. بدونه تأخذ قراءة كل صورة بضع دقائق (التفاصيل في قسم النموذج).</li>
+    </ul>
+    <div class="note">🔒 الصور والأرقام لا تغادر الحاسوب. القراءة يقوم بها نموذج ذكاء اصطناعي يعمل على الحاسوب نفسه.</div>
+  </section>
+
+  <section>
+    <h2>التجهيز — مرة واحدة فقط</h2>
+    <ol>
+      <li><strong>انسخ مجلد التطبيق</strong> إلى الحاسوب (إن كان ملفاً مضغوطاً فكّ الضغط أولاً)، مثلاً إلى <code>C:\tadqeeq</code>.</li>
+      <li><strong>ثبّت Python 3.13</strong> (يصلح أي إصدار من 3.11 إلى 3.14؛ الأقدم مثل 3.9 و3.10 <strong>لا يصلح</strong>) من <code>https://www.python.org/downloads/</code>.
+        في أول شاشة من برنامج التثبيت <strong>ضع علامة على «Add python.exe to PATH»</strong> ثم اضغط Install Now.</li>
+      <li><strong>ثبّت Ollama</strong> من <code>https://ollama.com/download</code> (هو البرنامج الذي يشغّل النموذج على الحاسوب). بعد التثبيت يعمل تلقائياً وتظهر أيقونته قرب الساعة.</li>
+      <li><strong>انقر نقراً مزدوجاً على <code>setup.bat</code></strong> داخل مجلد التطبيق. يقوم تلقائياً بـ:
+        <ul>
+          <li>تثبيت مكتبات التطبيق داخل المجلد نفسه (<code>.venv</code>).</li>
+          <li>تنزيل النموذج <code>qwen3-vl:4b-instruct</code> (نحو 3.3 غيغابايت). إذا انقطع التنزيل أعد تشغيل <code>setup.bat</code> فيكمل من حيث توقف.</li>
+          <li>اختبار أن النموذج يعمل ويقرأ كشفاً عربياً تجريبياً على هذا الحاسوب (بضع دقائق)، وتظهر كلمة <code>PASS</code> عند النجاح.</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>كيف أعرف إصدار Python الموجود؟</h3>
+    <p>اضغط زر Windows واكتب <code>cmd</code> ثم Enter، واكتب في النافذة السوداء:</p>
+    <p><code>python --version</code> &nbsp; ثم &nbsp; <code>py -0</code></p>
+    <p>الأمر الثاني يعرض كل الإصدارات المثبّتة. إذا لم يكن بينها 3.11 أو أحدث فثبّت 3.13 من الرابط أعلاه: <strong>لا يحذف الإصدار القديم</strong> ولا يعطّل ما يعتمد عليه، ويعمل الإصداران جنباً إلى جنب، و<code>setup.bat</code> يختار المناسب تلقائياً. <strong>لا حاجة لنقل Python من حاسوب إلى آخر</strong>، يكفي إرسال ملف التطبيق المضغوط.</p>
+    <h3>إنترنت بطيء؟ انسخ النموذج بدل تنزيله</h3>
+    <p>من حاسوب عليه النموذج، انسخ المجلد <code>C:\Users\اسم_المستخدم\.ollama\models</code> كاملاً على فلاشة، وضعه في المكان نفسه على الحاسوب الجديد (بعد تثبيت Ollama)، ثم شغّل <code>setup.bat</code>؛ سيتخطى التنزيل.</p>
+  </section>
+
+  <section>
+    <h2>التشغيل اليومي</h2>
+    <table>
+      <tr><th>الملف</th><th>متى تستخدمه</th></tr>
+      <tr><td><code>run.bat</code></td><td>العمل على الحاسوب فقط (رفع صور موجودة على الحاسوب).</td></tr>
+      <tr><td><code>run_phone.bat</code></td><td>عندما تريد التصوير بالهاتف وإرسال الصور مباشرة إلى التطبيق.</td></tr>
+    </table>
+    <p>تفتح صفحة التطبيق في المتصفح تلقائياً. اترك النافذة السوداء مفتوحة ما دمت تعمل، وأغلقها عند الانتهاء.</p>
+    <p>جرّب أولاً زر <strong>«تجربة ببيانات نموذجية»</strong> لترى كيف تعمل المراجعة والنتيجة بدون صور.</p>
+  </section>
+
+  <section>
+    <h2>📱 التصوير من الهاتف مباشرة إلى التطبيق</h2>
+    <ol>
+      <li>شغّل التطبيق بالملف <code>run_phone.bat</code>.</li>
+      <li>أول مرة فقط: إذا سأل Windows عن جدار الحماية اختر <strong>السماح (Allow)</strong> للشبكات <strong>الخاصة (Private)</strong>.</li>
+      <li>تأكد أن الهاتف على <strong>نفس شبكة Wi‑Fi</strong> التي عليها الحاسوب (وليس على بيانات الهاتف).</li>
+      <li>في صفحة «الإدخال» على الحاسوب افتح <strong>«📱 التصوير من الهاتف مباشرة»</strong>. يظهر رمز QR.</li>
+      <li>وجّه كاميرا الهاتف إلى الرمز وافتح الرابط. تفتح صفحة بسيطة فيها مربعان: <strong>صفحة الخلاصة</strong> و<strong>الكشوف</strong>.</li>
+      <li>اضغط على المربع، اختر <strong>الكاميرا</strong> (في آيفون: «التقاط صورة»)، وصوّر الورقة. كرّر لكل كشف بالترتيب.</li>
+      <li>اضغط <strong>«إرسال إلى الحاسوب»</strong>. خلال ثوانٍ تظهر الصور على شاشة الحاسوب تلقائياً.</li>
+      <li>على الحاسوب اضغط <strong>«استخراج البيانات من الصور»</strong> وتابع المراجعة هناك.</li>
+    </ol>
+    <h3>نصائح للتصوير</h3>
+    <ul>
+      <li>صوّر الورقة كاملة، من الأعلى مباشرة، وهي مفرودة ومستقيمة.</li>
+      <li>إضاءة جيدة بدون ظل اليد أو الهاتف، وبدون فلاش يلمع على الورق.</li>
+      <li>ورقة واحدة في كل صورة. الورقة الطويلة جداً تُصوَّر على جزأين.</li>
+      <li>ملفات PDF مقبولة أيضاً (على الحاسوب ومن الهاتف): كل صفحة تُقرأ ككشف. ملف PDF واحد للدفعة كلها يُرفع في خانة «صفحة الخلاصة» — الصفحة الأولى خلاصة والباقي كشوف.</li>
+    </ul>
+    <h3>الهاتف لا يفتح الصفحة؟</h3>
+    <ul>
+      <li>الهاتف والحاسوب يجب أن يكونا على شبكة Wi‑Fi نفسها. شبكات «الضيوف» تمنع ذلك غالباً.</li>
+      <li>تأكد أنك شغّلت <code>run_phone.bat</code> وليس <code>run.bat</code>، وأن النافذة السوداء ما زالت مفتوحة.</li>
+      <li>في Windows: الإعدادات ← الشبكة ← Wi‑Fi ← خصائص الشبكة ← اختر <strong>Private (خاصة)</strong>، ثم أعد التشغيل واسمح في جدار الحماية.</li>
+      <li>يمكن كتابة العنوان الظاهر تحت الرمز يدوياً في متصفح الهاتف (يبدأ بـ <code>http://192.168…</code>).</li>
+    </ul>
+    <div class="note">أثناء تشغيل <code>run_phone.bat</code> يستطيع أي جهاز على شبكة Wi‑Fi نفسها فتح التطبيق. استخدمه على شبكة البيت أو المكتب الموثوقة فقط، وأغلق النافذة عند الانتهاء.</div>
+  </section>
+
+  <section>
+    <h2>النموذج ودقته في العربية</h2>
+    <p>النموذج المستخدم هو <code>qwen3-vl:4b-instruct</code>: نموذج رؤية مفتوح يعمل على حاسوب عادي بدون كرت شاشة. يقرأ الكلمات العربية جيداً، أما الأرقام فدقته تعتمد على شكلها (انظر الجدول). هو يقرأ النص فقط؛ كل الجمع والتحقق يتم بحسابات ثابتة في البرنامج.</p>
+    <h3>ما الذي قسناه فعلاً</h3>
+    <p>جُرّب النموذج على حاسوب محمول عادي (معالج i5، ذاكرة 16 غيغابايت، بدون كرت شاشة):</p>
+    <table>
+      <tr><th>الاختبار</th><th>النتيجة</th></tr>
+      <tr><td>كشف مطبوع بالأرقام <span class="num">0123</span></td><td>✅ كل الأرقام صحيحة</td></tr>
+      <tr><td>أرقام <span class="num">0123</span> بخط اليد (10 أسطر)</td><td>✅ 30 قيمة صحيحة من 30 (في الوضعين: الصفحة كاملة وعلى شرائط)</td></tr>
+      <tr><td>كشف مطبوع بالأرقام ٠١٢٣</td><td>❌ أخطاء: يُسقط الأصفار ويخلط بين ٥ و ٠</td></tr>
+      <tr><td>أرقام ٠١٢٣ بخط اليد</td><td>❌ فشل: يخمّن القيم ويكرّرها</td></tr>
+    </table>
+    <div class="note"><strong>الخلاصة:</strong> النموذج جيد إذا كانت الكشوف مكتوبة بالأرقام <span class="num">0123456789</span>،
+      و<strong>غير موثوق</strong> إذا كانت مكتوبة بالأرقام ٠١٢٣٤٥٦٧٨٩. في الحالة الثانية استخدم زر
+      «إدخال يدوي بدون صور»: تكتب الأرقام بنفسك ويقوم التطبيق بكل التحقق والتعبئة والتجميع.</div>
+    <ul>
+      <li>اختبارات خط اليد أُجريت على كشوف مركّبة من عيّنات عامة لأرقام مكتوبة باليد، لا على صور كشوف حقيقية. جرّب على كشف حقيقي قبل الاعتماد عليه.</li>
+      <li>السرعة على هذا الحاسوب: نحو دقيقتين إلى ثلاث لكل جزء مقروء. الصورة في الوضع «عادية» جزء أو جزءان، وفي «دقيقة» خمسة أجزاء أو أكثر، وقد طالت إحدى التجارب الدقيقة إلى 40 دقيقة للورقة.</li>
+      <li>النموذج يأخذ نحو 5 غيغابايت من الذاكرة أثناء القراءة. أغلق البرامج الأخرى إن كانت الذاكرة قليلة.</li>
+    </ul>
+    <h3>«دقة القراءة» في الشريط الجانبي</h3>
+    <p>النموذج يرى كل صورة بحجم ثابت صغير، فكلما احتوت الصورة أسطراً أكثر صارت الأرقام أصغر عليه. لذلك يقطع التطبيق الصورة إلى أجزاء أفقية ويقرأ كل جزء وحده: «عادية» للكشوف المعتادة، «دقيقة» للكشوف المزدحمة أو الخط الصغير (أبطأ بكثير)، و«سريعة» للصفحات القليلة الأسطر.</p>
+    <h3>كيف تتعامل مع أخطاء القراءة</h3>
+    <ul>
+      <li><strong>راجع كل الأرقام مقابل الصورة</strong> في شاشة المراجعة، وابدأ بالأسطر المعلَّمة «غير واضح».</li>
+      <li>فحص المجموع وفحص التسلسل يكشفان أغلب أخطاء القراءة تلقائياً: إذا لم يطابق المجموع الرقم 1 فهناك رقم مقروء خطأ.</li>
+      <li>اختر <strong>«دقيقة»</strong> في «دقة القراءة»، أو فعّل <strong>«قراءة مزدوجة للتأكد»</strong>، للدفعات المهمة (وقت أطول).</li>
+      <li>اكتب <strong>«وصف شكل الكشف»</strong> في الشريط الجانبي إذا كان في الكشف أعمدة إضافية (مثل الاسم).</li>
+    </ul>
+    <h3>نموذج أدق (اختياري)</h3>
+    <p>إذا كانت ذاكرة الحاسوب 16 غيغابايت أو أكثر يمكن تجربة النموذج الأكبر: نفّذ <code>ollama pull qwen3-vl:8b-instruct</code> (نحو 6 غيغابايت) ثم اختره من الشريط الجانبي. هو أبطأ، ولم يُختبر هنا.</p>
+  </section>
+
+  <section>
+    <h2>مشاكل شائعة</h2>
+    <table>
+      <tr><th>المشكلة</th><th>الحل</th></tr>
+      <tr><td>رسالة «خادم Ollama لا يعمل»</td><td>افتح برنامج Ollama من قائمة ابدأ ثم حدّث الصفحة.</td></tr>
+      <tr><td>رسالة «النموذج غير منزّل»</td><td>شغّل <code>setup.bat</code> من جديد.</td></tr>
+      <tr><td><code>run.bat</code> يقول إن التطبيق غير مجهّز أو لا يجد Python</td><td>شغّل <code>setup.bat</code> أولاً (مرة واحدة). لا تنسخ المجلد <code>.venv</code> من حاسوب آخر؛ <code>setup.bat</code> يعيد بناءه تلقائياً إن وجده.</td></tr>
+      <tr><td><code>setup.bat</code> يقول إنه لم يجد Python 3.11 – 3.14</td><td>ثبّت Python 3.13 بجانب الإصدار القديم (انظر «كيف أعرف إصدار Python»)، مع علامة «Add python.exe to PATH»، ثم أعد تشغيل <code>setup.bat</code>.</td></tr>
+      <tr><td>القراءة بطيئة جداً أو الحاسوب يتجمد</td><td>أغلق البرامج الأخرى (خاصة المتصفحات الكثيرة) لتوفير الذاكرة، وصوّر ورقة واحدة في كل صورة.</td></tr>
+      <tr><td>«القراءة انقطعت قبل نهايتها»</td><td>الورقة طويلة: صوّرها على جزأين.</td></tr>
+      <tr><td>أرقام كثيرة خاطئة</td><td>إن كانت الأرقام مكتوبة بشكل ٠١٢٣ فهذا متوقع: استخدم الإدخال اليدوي. وإلا أعد التصوير بإضاءة أفضل وبدون ميلان، واختر «دقيقة»، وأضف «وصف شكل الكشف».</td></tr>
+    </table>
+    <p>أين تُحفظ البيانات؟ الدفعات المحفوظة في <code>data\batches</code> داخل مجلد التطبيق. انسخ مجلد <code>data</code> لأخذ نسخة احتياطية.</p>
+  </section>
+</div>
+
+<hr>
+
+<!-- ============================ English ============================ -->
+<div id="en" class="en" lang="en" dir="ltr">
+  <div class="lang"><a href="#ar">العربية ↑</a></div>
+  <h1>Starter guide — Sheet Check</h1>
+  <p class="lead">Setting the app up on a new computer, downloading the model, and taking photos straight from a phone.</p>
+
+  <section>
+    <h2>What you need</h2>
+    <ul>
+      <li>A Windows 10 or 11 computer (64-bit).</li>
+      <li>16 GB of RAM recommended (8 GB minimum) and about 6 GB of free disk space.</li>
+      <li>Internet <strong>for setup only</strong> (about 3.5 GB of downloads). After that the app works offline.</li>
+      <li>No graphics card is needed. Without one, each photo takes a few minutes to read (details in the model section).</li>
+    </ul>
+    <div class="note">🔒 Photos and numbers never leave the computer. They are read by an AI model that runs on the computer itself.</div>
+  </section>
+
+  <section>
+    <h2>Setup — once only</h2>
+    <ol>
+      <li><strong>Copy the app folder</strong> to the computer (unzip it first if it is a zip), for example to <code>C:\tadqeeq</code>.</li>
+      <li><strong>Install Python 3.13</strong> (any version from 3.11 to 3.14 works; older ones such as 3.9 and 3.10 <strong>do not</strong>) from <code>https://www.python.org/downloads/</code>.
+        On the first installer screen <strong>tick “Add python.exe to PATH”</strong>, then click Install Now.</li>
+      <li><strong>Install Ollama</strong> from <code>https://ollama.com/download</code> (the program that runs the model locally). It starts by itself and shows an icon near the clock.</li>
+      <li><strong>Double-click <code>setup.bat</code></strong> in the app folder. It will:
+        <ul>
+          <li>install the app's libraries inside the folder (<code>.venv</code>);</li>
+          <li>download the model <code>qwen3-vl:4b-instruct</code> (about 3.3 GB). If the download is interrupted, run <code>setup.bat</code> again and it continues;</li>
+          <li>test that the model works and reads an Arabic test sheet on this computer (a few minutes), printing <code>PASS</code> on success.</li>
+        </ul>
+      </li>
+    </ol>
+    <h3>How do I find out which Python is installed?</h3>
+    <p>Press the Windows key, type <code>cmd</code>, press Enter, and in the black window type:</p>
+    <p><code>python --version</code> &nbsp; then &nbsp; <code>py -0</code></p>
+    <p>The second command lists every installed version. If none is 3.11 or newer, install 3.13 from the link above: it <strong>does not remove the old version</strong> or break anything that depends on it, the two live side by side, and <code>setup.bat</code> picks the right one by itself. <strong>There is no need to move Python from one computer to another</strong>; sending the app zip is enough.</p>
+    <h3>Slow internet? Copy the model instead of downloading it</h3>
+    <p>From a computer that already has the model, copy the whole folder <code>C:\Users\&lt;user&gt;\.ollama\models</code> to a USB stick and put it in the same place on the new computer (after installing Ollama). Then run <code>setup.bat</code>; it skips the download.</p>
+  </section>
+
+  <section>
+    <h2>Daily use</h2>
+    <table>
+      <tr><th>File</th><th>When to use it</th></tr>
+      <tr><td><code>run.bat</code></td><td>Working on the computer only (uploading photos already on the computer).</td></tr>
+      <tr><td><code>run_phone.bat</code></td><td>When you want to take photos with the phone and send them straight into the app.</td></tr>
+    </table>
+    <p>The app opens in the browser by itself. Keep the black window open while working and close it when done.</p>
+    <p>Try the <strong>“تجربة ببيانات نموذجية”</strong> (sample data) button first to see the review and result screens without any photos.</p>
+  </section>
+
+  <section>
+    <h2>📱 Taking photos on the phone, straight into the app</h2>
+    <ol>
+      <li>Start the app with <code>run_phone.bat</code>.</li>
+      <li>First time only: if Windows asks about the firewall, choose <strong>Allow</strong> for <strong>Private</strong> networks.</li>
+      <li>Make sure the phone is on the <strong>same Wi‑Fi</strong> as the computer (not mobile data).</li>
+      <li>On the computer's input page open <strong>“📱 التصوير من الهاتف مباشرة”</strong>. A QR code appears.</li>
+      <li>Point the phone camera at the code and open the link. A simple page opens with two boxes: <strong>summary page</strong> and <strong>sheets</strong>.</li>
+      <li>Tap a box, choose <strong>Camera</strong> (iPhone: “Take Photo”), and photograph the page. Repeat for each sheet, in order.</li>
+      <li>Tap <strong>“إرسال إلى الحاسوب”</strong> (send to computer). Within seconds the photos appear on the computer screen by themselves.</li>
+      <li>On the computer press <strong>“استخراج البيانات من الصور”</strong> and continue the review there.</li>
+    </ol>
+    <h3>Photo tips</h3>
+    <ul>
+      <li>Capture the whole page from directly above, flat and straight.</li>
+      <li>Good light, no shadow from the hand or phone, no flash glare.</li>
+      <li>One sheet per photo. Photograph a very long sheet in two halves.</li>
+      <li>PDF files work too (on the computer and from the phone): every page is read as a sheet. A single PDF holding the whole batch goes in the “صفحة الخلاصة” (summary) box: page 1 is the summary, the rest are sheets.</li>
+    </ul>
+    <h3>The phone cannot open the page?</h3>
+    <ul>
+      <li>Phone and computer must be on the same Wi‑Fi. “Guest” networks usually block this.</li>
+      <li>Check you started <code>run_phone.bat</code>, not <code>run.bat</code>, and the black window is still open.</li>
+      <li>In Windows: Settings → Network → Wi‑Fi → network properties → choose <strong>Private</strong>, then restart the app and allow it in the firewall.</li>
+      <li>You can type the address shown under the QR code into the phone browser by hand (it starts with <code>http://192.168…</code>).</li>
+    </ul>
+    <div class="note">While <code>run_phone.bat</code> is running, any device on the same Wi‑Fi can open the app. Use it only on a trusted home or office network, and close the window when finished.</div>
+  </section>
+
+  <section>
+    <h2>The model and its accuracy in Arabic</h2>
+    <p>The model is <code>qwen3-vl:4b-instruct</code>: an open vision model that runs on an ordinary computer without a graphics card. It reads Arabic words well; for numbers its accuracy depends on the digit style (see the table). It only transcribes; all sums and checks are fixed calculations in the program.</p>
+    <h3>What was actually measured</h3>
+    <p>The model was tried on an ordinary laptop (i5 processor, 16 GB RAM, no graphics card):</p>
+    <table>
+      <tr><th>Test</th><th>Result</th></tr>
+      <tr><td>Printed sheet with digits 0123</td><td>✅ every number correct</td></tr>
+      <tr><td>Handwritten digits 0123 (10 rows)</td><td>✅ 30 of 30 values correct (both whole-page and in strips)</td></tr>
+      <tr><td>Printed sheet with digits ٠١٢٣</td><td>❌ errors: drops zeros and confuses ٥ with ٠</td></tr>
+      <tr><td>Handwritten digits ٠١٢٣</td><td>❌ failed: it guesses and repeats values</td></tr>
+    </table>
+    <div class="note"><strong>Bottom line:</strong> the model is good when the sheets are written with the digits 0123456789,
+      and <strong>not reliable</strong> when they are written with ٠١٢٣٤٥٦٧٨٩. In the second case use the
+      “إدخال يدوي بدون صور” (manual entry) button: you type the numbers and the app still does all the checking, form filling and totals.</div>
+    <ul>
+      <li>The handwriting tests used sheets assembled from public samples of handwritten digits, not photos of real ledgers. Try a real sheet before relying on it.</li>
+      <li>Speed on this laptop: about two to three minutes per part read. A photo is one or two parts in “normal” mode and five or more in “accurate” mode; one accurate run took 40 minutes for a single sheet.</li>
+      <li>The model takes about 5 GB of memory while reading. Close other programs if memory is short.</li>
+    </ul>
+    <h3>“دقة القراءة” (reading accuracy) in the sidebar</h3>
+    <p>The model sees every image at the same small fixed size, so the more rows a photo holds, the smaller the digits become for it. The app therefore cuts the photo into horizontal parts and reads each part separately: “عادية” (normal) for ordinary sheets, “دقيقة” (accurate) for crowded sheets or small handwriting (much slower), and “سريعة” (fast) for pages with few rows.</p>
+    <h3>How to deal with misreadings</h3>
+    <ul>
+      <li><strong>Check every number against the photo</strong> on the review screen, starting with the rows marked “غير واضح” (unclear).</li>
+      <li>The total check and the serial check catch most misreadings by themselves: if the sum does not match number 1, a number was read wrong.</li>
+      <li>Choose <strong>“دقيقة”</strong> (accurate) under reading accuracy, or turn on <strong>“قراءة مزدوجة للتأكد”</strong> (double reading), for important batches (more time).</li>
+      <li>Fill in <strong>“وصف شكل الكشف”</strong> (sheet description) in the sidebar if the sheet has extra columns such as a name.</li>
+    </ul>
+    <h3>A more accurate model (optional)</h3>
+    <p>With 16 GB of RAM or more you can try the larger model: run <code>ollama pull qwen3-vl:8b-instruct</code> (about 6 GB) and pick it in the sidebar. It is slower, and it has not been tested here.</p>
+  </section>
+
+  <section>
+    <h2>Common problems</h2>
+    <table>
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>“خادم Ollama لا يعمل” (Ollama is not running)</td><td>Open Ollama from the Start menu, then refresh the page.</td></tr>
+      <tr><td>“النموذج غير منزّل” (model not downloaded)</td><td>Run <code>setup.bat</code> again.</td></tr>
+      <tr><td><code>run.bat</code> says the app is not set up or cannot find Python</td><td>Run <code>setup.bat</code> first (once). Do not copy the <code>.venv</code> folder from another computer; <code>setup.bat</code> rebuilds it automatically if it finds one.</td></tr>
+      <tr><td><code>setup.bat</code> says it found no Python 3.11 – 3.14</td><td>Install Python 3.13 next to the old version (see “How do I find out which Python is installed?”), with “Add python.exe to PATH” ticked, then run <code>setup.bat</code> again.</td></tr>
+      <tr><td>Reading is very slow or the computer freezes</td><td>Close other programs (especially many browser tabs) to free memory, and photograph one sheet per photo.</td></tr>
+      <tr><td>“القراءة انقطعت قبل نهايتها” (reading was cut off)</td><td>The sheet is long: photograph it in two halves.</td></tr>
+      <tr><td>Many wrong numbers</td><td>If the numbers are written as ٠١٢٣ this is expected: use manual entry. Otherwise retake the photo with better light and no tilt, choose “دقيقة” (accurate), and add a sheet description.</td></tr>
+    </table>
+    <p>Where is the data? Saved batches are in <code>data\batches</code> inside the app folder. Copy the <code>data</code> folder to back it up.</p>
+  </section>
+</div>
+
+</main>
+</body>
+</html>
